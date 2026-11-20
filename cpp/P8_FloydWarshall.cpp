@@ -1,18 +1,14 @@
-#include <algorithm>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <stdexcept>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-constexpr int noEdge = std::numeric_limits<int>::max();
-constexpr auto infinity = std::numeric_limits<long long>::max();
+constexpr int noEdge = numeric_limits<int>::max();
+constexpr auto infinity = numeric_limits<long long>::max();
 
-std::vector<std::vector<long long>> floydWarshall(
-    const std::vector<std::vector<int>>& graph) {
+vector<vector<long long>> floydWarshall(
+    const vector<vector<int>>& graph) {
     const int vertices = static_cast<int>(graph.size());
-    std::vector<std::vector<long long>> distance(
-        vertices, std::vector<long long>(vertices, infinity));
+    vector<vector<long long>> distance(
+        vertices, vector<long long>(vertices, infinity));
 
     for (int from = 0; from < vertices; ++from) {
         for (int to = 0; to < vertices; ++to) {
@@ -20,9 +16,9 @@ std::vector<std::vector<long long>> floydWarshall(
                 distance[from][to] = graph[from][to];
             }
         }
-        distance[from][from] = std::min(distance[from][from], 0LL);
+        distance[from][from] = min(distance[from][from], 0LL);
         if (distance[from][from] < 0) {
-            throw std::invalid_argument("The graph contains a negative weight cycle");
+            throw invalid_argument("The graph contains a negative weight cycle");
         }
     }
 
@@ -40,7 +36,7 @@ std::vector<std::vector<long long>> floydWarshall(
                 long long candidate = distance[from][via] + distance[via][to];
                 if (candidate < distance[from][to]) {
                     if (from == to && candidate < 0) {
-                        throw std::invalid_argument("The graph contains a negative weight cycle");
+                        throw invalid_argument("The graph contains a negative weight cycle");
                     }
                     distance[from][to] = candidate;
                 }
@@ -52,7 +48,7 @@ std::vector<std::vector<long long>> floydWarshall(
 }
 
 int main() {
-    const std::vector<std::vector<int>> graph = {
+    const vector<vector<int>> graph = {
         {0, 2, 1, noEdge, noEdge, noEdge},
         {noEdge, 0, noEdge, 2, 3, noEdge},
         {noEdge, noEdge, 0, 6, 7, noEdge},
@@ -62,19 +58,19 @@ int main() {
     };
 
     const auto distance = floydWarshall(graph);
-    std::cout << "All pairs shortest path distances:\n";
+    cout << "All pairs shortest path distances:\n";
     for (const auto& row : distance) {
-        for (std::size_t column = 0; column < row.size(); ++column) {
+        for (size_t column = 0; column < row.size(); ++column) {
             if (column != 0) {
-                std::cout << ' ';
+                cout << ' ';
             }
-            std::cout << std::setw(5);
+            cout << setw(5);
             if (row[column] == infinity) {
-                std::cout << "INF";
+                cout << "INF";
             } else {
-                std::cout << row[column];
+                cout << row[column];
             }
         }
-        std::cout << '\n';
+        cout << '\n';
     }
 }

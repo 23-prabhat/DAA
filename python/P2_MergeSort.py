@@ -32,26 +32,9 @@ def merge_sort(arr, left, right):
 
 
 def main():
-    try:
-        n = int(input("Enter the size of the array: "))
-    except (EOFError, ValueError):
-        n = -1
+    arr = [38, 27, 43, 3, 9, 27]
 
-    if n < 0:
-        print("Enter a non-negative array size.")
-        return
-
-    print("Enter the elements separated by spaces: ", end="", flush=True)
-    try:
-        arr = list(map(int, input().split())) if n else []
-    except (EOFError, ValueError):
-        arr = []
-
-    if len(arr) != n:
-        print("Enter the requested number of integers.")
-        return
-
-    merge_sort(arr, 0, n - 1)
+    merge_sort(arr, 0, len(arr) - 1)
     print("Sorted array:", *arr)
 
 

@@ -1,4 +1,5 @@
-#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
 
 unsigned long long recursiveFactorial(int n) {
     if (n <= 1) {
@@ -17,23 +18,19 @@ unsigned long long iterativeFactorial(int n) {
 }
 
 int main() {
-    int n;
-    std::cout << "Enter a non-negative integer: ";
-    if (!(std::cin >> n)) {
-        std::cout << "Enter a valid integer.\n";
-        return 0;
-    }
+    const int n = 5;
+
     if (n < 0) {
-        std::cout << "Factorial is undefined for negative integers.\n";
+        cout << "Factorial is undefined for negative integers.\n";
         return 0;
     }
     if (n > 20) {
-        std::cout << "Enter a number from 0 to 20 for a 64-bit factorial.\n";
+        cout << "Enter a number from 0 to 20 for a 64-bit factorial.\n";
         return 0;
     }
 
-    std::cout << "Recursive factorial: " << recursiveFactorial(n) << '\n';
-    std::cout << "Iterative factorial: " << iterativeFactorial(n) << '\n';
-    std::cout << "Recursive: O(n) time, O(n) auxiliary space\n";
-    std::cout << "Iterative: O(n) time, O(1) auxiliary space\n";
+    cout << "Recursive factorial: " << recursiveFactorial(n) << '\n';
+    cout << "Iterative factorial: " << iterativeFactorial(n) << '\n';
+    cout << "Recursive: O(n) time, O(n) auxiliary space\n";
+    cout << "Iterative: O(n) time, O(1) auxiliary space\n";
 }

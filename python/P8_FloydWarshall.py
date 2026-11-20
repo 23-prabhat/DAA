@@ -26,6 +26,7 @@ if __name__ == "__main__":
         [inf, inf, inf, inf, 0, 2],
         [inf, inf, inf, inf, inf, 0],
     ]
+
     distance = floyd_warshall(graph)
 
     print("All pairs shortest path distances:")

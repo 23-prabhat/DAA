@@ -35,7 +35,9 @@ if __name__ == "__main__":
         [(0, 6), (3, 4)],
         [(0, 5), (1, 15), (2, 4)],
     ]
-    total_weight, mst = prim(graph)
+    start_vertex = 0
+
+    total_weight, mst = prim(graph, start_vertex)
     print("Edges in the minimum spanning tree:")
     for u, v, weight in mst:
         print(f"{u} - {v}: {weight}")

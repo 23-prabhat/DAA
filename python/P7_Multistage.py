@@ -51,7 +51,10 @@ if __name__ == "__main__":
         [(5, 2)],
         [],
     ]
-    distance, path = multistage_shortest_path(graph, 0, 5)
+    source = 0
+    destination = 5
+
+    distance, path = multistage_shortest_path(graph, source, destination)
     if path:
         print("Shortest distance:", distance)
         print("Shortest path:", " -> ".join(map(str, path)))

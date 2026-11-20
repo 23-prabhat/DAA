@@ -34,6 +34,7 @@ def huffman_codes(frequencies):
 
 if __name__ == "__main__":
     text = "huffman coding"
+
     codes = huffman_codes(Counter(text))
 
     print("Huffman codes:")

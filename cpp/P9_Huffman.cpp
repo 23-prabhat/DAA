@@ -1,10 +1,5 @@
-#include <functional>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <string>
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Node {
     char character;
@@ -12,8 +7,8 @@ struct Node {
     int right;
 };
 
-void assignCodes(const std::vector<Node>& tree, int node, const std::string& code,
-                 std::map<char, std::string>& codes) {
+void assignCodes(const vector<Node>& tree, int node, const string& code,
+                 map<char, string>& codes) {
     const auto& entry = tree[node];
     if (entry.left == -1) {
         codes[entry.character] = code.empty() ? "0" : code;
@@ -24,10 +19,10 @@ void assignCodes(const std::vector<Node>& tree, int node, const std::string& cod
     assignCodes(tree, entry.right, code + '1', codes);
 }
 
-std::map<char, std::string> huffmanCodes(const std::map<char, int>& frequencies) {
-    using Entry = std::pair<long long, int>;
-    std::priority_queue<Entry, std::vector<Entry>, std::greater<Entry>> heap;
-    std::vector<Node> tree;
+map<char, string> huffmanCodes(const map<char, int>& frequencies) {
+    using Entry = pair<long long, int>;
+    priority_queue<Entry, vector<Entry>, greater<Entry>> heap;
+    vector<Node> tree;
 
     for (const auto& [character, weight] : frequencies) {
         heap.emplace(weight, static_cast<int>(tree.size()));
@@ -44,7 +39,7 @@ std::map<char, std::string> huffmanCodes(const std::map<char, int>& frequencies)
         tree.push_back({'\0', left, right});
     }
 
-    std::map<char, std::string> codes;
+    map<char, string> codes;
     if (!heap.empty()) {
         assignCodes(tree, heap.top().second, "", codes);
     }
@@ -52,22 +47,23 @@ std::map<char, std::string> huffmanCodes(const std::map<char, int>& frequencies)
 }
 
 int main() {
-    const std::string text = "huffman coding";
-    std::map<char, int> frequencies;
+    const string text = "huffman coding";
+
+    map<char, int> frequencies;
     for (char character : text) {
         ++frequencies[character];
     }
 
     const auto codes = huffmanCodes(frequencies);
-    std::cout << "Huffman codes:\n";
+    cout << "Huffman codes:\n";
     for (const auto& [character, code] : codes) {
-        std::cout << '\'' << character << "': " << code << '\n';
+        cout << '\'' << character << "': " << code << '\n';
     }
 
-    std::cout << "Original text: " << text << '\n';
-    std::cout << "Encoded text: ";
+    cout << "Original text: " << text << '\n';
+    cout << "Encoded text: ";
     for (char character : text) {
-        std::cout << codes.at(character);
+        cout << codes.at(character);
     }
-    std::cout << '\n';
+    cout << '\n';
 }

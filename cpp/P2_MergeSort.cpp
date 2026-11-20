@@ -1,8 +1,7 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-void mergeSort(std::vector<int>& numbers, std::vector<int>& buffer,
+void mergeSort(vector<int>& numbers, vector<int>& buffer,
                int left, int right) {
     if (right - left <= 1) {
         return;
@@ -30,32 +29,19 @@ void mergeSort(std::vector<int>& numbers, std::vector<int>& buffer,
         buffer[output++] = numbers[second++];
     }
 
-    std::copy(buffer.begin() + left, buffer.begin() + right, numbers.begin() + left);
+    copy(buffer.begin() + left, buffer.begin() + right, numbers.begin() + left);
 }
 
 int main() {
-    int size;
-    std::cout << "Enter the size of the array: ";
-    if (!(std::cin >> size) || size < 0) {
-        std::cout << "Enter a non-negative array size.\n";
-        return 0;
-    }
+    vector<int> numbers = {38, 27, 43, 3, 9, 27};
 
-    std::vector<int> numbers(size);
-    std::cout << "Enter the elements separated by spaces: ";
-    for (int& number : numbers) {
-        if (!(std::cin >> number)) {
-            std::cout << "Enter the requested number of integers.\n";
-            return 0;
-        }
-    }
-
-    std::vector<int> buffer(size);
+    const int size = static_cast<int>(numbers.size());
+    vector<int> buffer(size);
     mergeSort(numbers, buffer, 0, size);
 
-    std::cout << "Sorted array:";
+    cout << "Sorted array:";
     for (int number : numbers) {
-        std::cout << ' ' << number;
+        cout << ' ' << number;
     }
-    std::cout << '\n';
+    cout << '\n';
 }

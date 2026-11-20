@@ -1,21 +1,21 @@
-#include <array>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-constexpr int size = 8;
-using Board = std::array<int, size>;
+constexpr int boardSize = 8;
 
-void solveQueens(int row, Board& board, std::array<bool, size>& columns,
-                 std::array<bool, 2 * size - 1>& diagonals,
-                 std::array<bool, 2 * size - 1>& antiDiagonals,
-                 std::vector<Board>& solutions) {
-    if (row == size) {
+using Board = array<int, boardSize>;
+
+void solveQueens(int row, Board& board, array<bool, boardSize>& columns,
+                 array<bool, 2 * boardSize - 1>& diagonals,
+                 array<bool, 2 * boardSize - 1>& antiDiagonals,
+                 vector<Board>& solutions) {
+    if (row == boardSize) {
         solutions.push_back(board);
         return;
     }
 
-    for (int column = 0; column < size; ++column) {
-        int diagonal = row - column + size - 1;
+    for (int column = 0; column < boardSize; ++column) {
+        int diagonal = row - column + boardSize - 1;
         int antiDiagonal = row + column;
         if (columns[column] || diagonals[diagonal] || antiDiagonals[antiDiagonal]) {
             continue;
@@ -30,23 +30,23 @@ void solveQueens(int row, Board& board, std::array<bool, size>& columns,
 
 int main() {
     Board board{};
-    std::array<bool, size> columns{};
-    std::array<bool, 2 * size - 1> diagonals{};
-    std::array<bool, 2 * size - 1> antiDiagonals{};
-    std::vector<Board> solutions;
+    array<bool, boardSize> columns{};
+    array<bool, 2 * boardSize - 1> diagonals{};
+    array<bool, 2 * boardSize - 1> antiDiagonals{};
+    vector<Board> solutions;
     solveQueens(0, board, columns, diagonals, antiDiagonals, solutions);
 
-    std::cout << "Total solutions: " << solutions.size() << '\n';
+    cout << "Total solutions: " << solutions.size() << '\n';
     if (!solutions.empty()) {
-        std::cout << "One solution:\n";
+        cout << "One solution:\n";
         for (int queen : solutions.front()) {
-            for (int column = 0; column < size; ++column) {
+            for (int column = 0; column < boardSize; ++column) {
                 if (column != 0) {
-                    std::cout << ' ';
+                    cout << ' ';
                 }
-                std::cout << (column == queen ? 'Q' : '.');
+                cout << (column == queen ? 'Q' : '.');
             }
-            std::cout << '\n';
+            cout << '\n';
         }
     }
 }

@@ -17,12 +17,9 @@ def binary_search(numbers, target):
 
 def main():
     numbers = [10, 20, 30, 40, 50, 60, 70]
+    target = 60
+
     print("Sorted array:", *numbers)
-    try:
-        target = int(input("Enter the number to search: "))
-    except (EOFError, ValueError):
-        print("Enter a valid integer.")
-        return
 
     index = binary_search(numbers, target)
 

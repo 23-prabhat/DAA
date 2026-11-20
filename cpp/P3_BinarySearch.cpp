@@ -1,7 +1,7 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-int binarySearch(const std::vector<int>& numbers, int target) {
+int binarySearch(const vector<int>& numbers, int target) {
     int left = 0;
     int right = static_cast<int>(numbers.size()) - 1;
 
@@ -22,23 +22,20 @@ int binarySearch(const std::vector<int>& numbers, int target) {
 }
 
 int main() {
-    const std::vector<int> numbers = {10, 20, 30, 40, 50, 60, 70};
-    std::cout << "Sorted array:";
+    const vector<int> numbers = {10, 20, 30, 40, 50, 60, 70};
+    const int target = 60;
+
+    cout << "Sorted array:";
     for (int number : numbers) {
-        std::cout << ' ' << number;
+        cout << ' ' << number;
     }
 
-    int target;
-    std::cout << "\nEnter the number to search: ";
-    if (!(std::cin >> target)) {
-        std::cout << "Enter a valid integer.\n";
-        return 0;
-    }
+    cout << '\n';
 
     int index = binarySearch(numbers, target);
     if (index == -1) {
-        std::cout << "Number not found\n";
+        cout << "Number not found\n";
     } else {
-        std::cout << "Number found at index " << index << '\n';
+        cout << "Number found at index " << index << '\n';
     }
 }

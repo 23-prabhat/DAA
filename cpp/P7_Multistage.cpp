@@ -1,29 +1,25 @@
-#include <iostream>
-#include <limits>
-#include <queue>
-#include <stdexcept>
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
-using Graph = std::vector<std::vector<std::pair<int, int>>>;
+using Graph = vector<vector<pair<int, int>>>;
 
-std::pair<long long, std::vector<int>> multistageShortestPath(
+pair<long long, vector<int>> multistageShortestPath(
     const Graph& graph, int source, int destination) {
-    std::vector<int> indegree(graph.size(), 0);
+    vector<int> indegree(graph.size(), 0);
     for (const auto& edges : graph) {
         for (const auto& edge : edges) {
             ++indegree[edge.first];
         }
     }
 
-    std::queue<int> ready;
+    queue<int> ready;
     for (int vertex = 0; vertex < static_cast<int>(graph.size()); ++vertex) {
         if (indegree[vertex] == 0) {
             ready.push(vertex);
         }
     }
 
-    std::vector<int> order;
+    vector<int> order;
     while (!ready.empty()) {
         int vertex = ready.front();
         ready.pop();
@@ -37,12 +33,12 @@ std::pair<long long, std::vector<int>> multistageShortestPath(
     }
 
     if (order.size() != graph.size()) {
-        throw std::invalid_argument("A multistage graph must be acyclic");
+        throw invalid_argument("A multistage graph must be acyclic");
     }
 
-    constexpr auto infinity = std::numeric_limits<long long>::max();
-    std::vector<long long> cost(graph.size(), infinity);
-    std::vector<int> nextVertex(graph.size(), -1);
+    constexpr auto infinity = numeric_limits<long long>::max();
+    vector<long long> cost(graph.size(), infinity);
+    vector<int> nextVertex(graph.size(), -1);
     cost[destination] = 0;
 
     for (auto it = order.rbegin(); it != order.rend(); ++it) {
@@ -59,7 +55,7 @@ std::pair<long long, std::vector<int>> multistageShortestPath(
         return {infinity, {}};
     }
 
-    std::vector<int> path = {source};
+    vector<int> path = {source};
     while (path.back() != destination) {
         path.push_back(nextVertex[path.back()]);
     }
@@ -75,17 +71,19 @@ int main() {
         {{5, 2}},
         {},
     };
+    const int source = 0;
+    const int destination = 5;
 
-    auto [distance, path] = multistageShortestPath(graph, 0, 5);
+    auto [distance, path] = multistageShortestPath(graph, source, destination);
     if (path.empty()) {
-        std::cout << "No path exists\n";
+        cout << "No path exists\n";
         return 0;
     }
 
-    std::cout << "Shortest distance: " << distance << '\n';
-    std::cout << "Shortest path: " << path.front();
-    for (std::size_t index = 1; index < path.size(); ++index) {
-        std::cout << " -> " << path[index];
+    cout << "Shortest distance: " << distance << '\n';
+    cout << "Shortest path: " << path.front();
+    for (size_t index = 1; index < path.size(); ++index) {
+        cout << " -> " << path[index];
     }
-    std::cout << '\n';
+    cout << '\n';
 }

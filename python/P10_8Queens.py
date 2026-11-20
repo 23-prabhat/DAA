@@ -31,9 +31,11 @@ def solve_queens(n=8):
 
 
 if __name__ == "__main__":
-    solutions = solve_queens()
+    board_size = 8
+
+    solutions = solve_queens(board_size)
     print("Total solutions:", len(solutions))
     if solutions:
         print("One solution:")
         for column in solutions[0]:
-            print(" ".join("Q" if position == column else "." for position in range(8)))
+            print(" ".join("Q" if position == column else "." for position in range(board_size)))

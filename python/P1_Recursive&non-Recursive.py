@@ -12,11 +12,7 @@ def iterative_factorial(n):
 
 
 def main():
-    try:
-        n = int(input("Enter a non-negative integer: "))
-    except (EOFError, ValueError):
-        print("Enter a valid integer.")
-        return
+    n = 5
 
     if n < 0:
         print("Factorial is undefined for negative integers.")
